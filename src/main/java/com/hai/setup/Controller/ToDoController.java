@@ -23,6 +23,7 @@ public class ToDoController {
     public ToDo getToDo(@PathVariable long id){
         return toDoService.findById(id);
     }
+
     // POS: api/todos
     @PostMapping
     public ToDo add(@RequestBody ToDo toDo){
