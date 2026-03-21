@@ -1,6 +1,7 @@
 package com.hai.setup.Service.Impl;
 
 import com.hai.setup.Entity.ToDo;
+import com.hai.setup.Exception.CustomResourceNotFoundException;
 import com.hai.setup.Repository.ToDoRepository;
 import com.hai.setup.Service.ToDoService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class ToDoServiceImpl implements ToDoService {
     public ToDo findById(long id) {
         return toDoRepository
                 .findById(id)
-                .orElse(null);
+                .orElseThrow(() -> new CustomResourceNotFoundException("Todo Not Found for this id : "+ id));
     }
 
     @Override

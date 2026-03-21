@@ -1,6 +1,7 @@
 package com.hai.setup.Controller;
 import com.hai.setup.Entity.ToDo;
 import com.hai.setup.Service.ToDoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,19 +33,20 @@ public class ToDoController {
     @GetMapping("/{id}")
     public ResponseEntity<ToDo>  getToDo(@PathVariable long id){
        ToDo todos =  toDoService.findById(id);
+
        return  new ResponseEntity<>(todos, HttpStatus.OK);
     }
 
     // POS: api/todos
     // 201-CREATED
     @PostMapping
-    public ResponseEntity<ToDo> add(@RequestBody ToDo toDo){
+    public ResponseEntity<ToDo> add(@Valid @RequestBody ToDo toDo){
         ToDo addTodo = toDoService.add(toDo);
         return new ResponseEntity<>(addTodo, HttpStatus.CREATED);
     }
     // PUT: api/todos/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<ToDo> update(@RequestBody ToDo toDo, @PathVariable long id){
+    public ResponseEntity<ToDo> update(@Valid @RequestBody ToDo toDo, @PathVariable long id){
          ToDo updateTodo = toDoService.update(toDo,id);
          //return new ResponseEntity<>(updateTodo, HttpStatus.OK);
         return ResponseEntity
