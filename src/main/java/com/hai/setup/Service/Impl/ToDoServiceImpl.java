@@ -47,7 +47,7 @@ public class ToDoServiceImpl implements ToDoService {
 
                    return toDoRepository.save(exitsting);
                })
-               .orElse(null);
+               .orElseThrow(() -> new CustomResourceNotFoundException("Todo Not Found for this id : "+ id));
     }
 
     @Override
